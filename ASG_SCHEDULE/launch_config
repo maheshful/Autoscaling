@@ -1,0 +1,23 @@
+#------------------------------------------------------------------------------
+# Launch Configuration
+#------------------------------------------------------------------------------
+resource "aws_launch_configuration" "lc" {
+  name                             = upper(join("/", [local.name, "lc"]))
+  image_id                         = var.image_id
+  instance_type                    = var.instance_type
+  iam_instance_profile             = var.iam_instance_profile
+  key_name                         = var.key_name
+  security_groups                  = var.security_groups
+  associate_public_ip_address      = var.associate_public_ip_address
+  user_data                        = var.user_data
+  enable_monitoring                = var.enable_monitoring
+  ebs_optimized                    = var.ebs_optimized
+ # instance_refresh {
+ #   strategy = "Rolling"
+ #   preferences {
+ #     min_healthy_percentage = 50
+ #   }
+ #   triggers = ["tag"]
+ # }
+  # spot_price        = var.spot_price
+}
